@@ -1,3 +1,4 @@
+import { LigaService } from './services/liga.service';
 import { NacionalnostService } from './services/nacionalnost.service';
 import { Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatInputModule } from '@angular/material/input'
 
 import { AppComponent } from './app.component';
 import { VoziloComponent } from './vozilo/vozilo.component';
@@ -24,6 +26,14 @@ import { AuthorComponent } from './core/author/author.component';
 import { AboutComponent } from './core/about/about.component';
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NacionalnostDialogComponent } from './dialog/nacionalnost-dialog/nacionalnost-dialog.component';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { LigaDialogComponent } from './dialog/liga-dialog/liga-dialog.component';
+
+
 
 const Routes = [
       {path: 'nacionalnost', component: NacionalnostComponent},
@@ -46,13 +56,16 @@ const Routes = [
     IgracComponent,
     HomeComponent,
     AuthorComponent,
-    AboutComponent
+    AboutComponent,
+    NacionalnostDialogComponent,
+    LigaDialogComponent
   ],
   imports: [
     BrowserModule,
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
+    MatInputModule,
     MatListModule,
     MatGridListModule,
     MatExpansionModule,
@@ -60,10 +73,15 @@ const Routes = [
     MatTableModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    FormsModule,
+    MatFormFieldModule,
     RouterModule.forRoot(Routes)      
   ],
   providers: [
-   NacionalnostService
+   NacionalnostService,
+   LigaService
   ],
   bootstrap: [AppComponent]
 })

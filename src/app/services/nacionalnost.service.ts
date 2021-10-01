@@ -1,7 +1,8 @@
+import { Nacionalnost } from './../models/nacionalnost.model';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { Nacionalnost } from "../models/nacionalnost.model";
+
 
 @Injectable()
 export class NacionalnostService {
@@ -21,5 +22,17 @@ export class NacionalnostService {
                 console.log(error.name + ' ' + error.message);
             });
         return this.dataChange.asObservable();
+    }
+
+    public addNacionalnost(nacionalnost: Nacionalnost): void {
+        this.httpClient.post(this.API_URL, nacionalnost).subscribe();
+    }
+
+    public updateNacionalnost(nacionalnost: Nacionalnost): void {
+        this.httpClient.put(this.API_URL + nacionalnost.id, nacionalnost).subscribe();
+    }
+
+    public deleteNacionalnost(id: number): void {
+        this.httpClient.delete(this.API_URL + id).subscribe();
     }
 }
