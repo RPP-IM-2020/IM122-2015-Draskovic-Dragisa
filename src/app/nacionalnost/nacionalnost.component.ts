@@ -1,11 +1,13 @@
+import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Nacionalnost } from '../models/nacionalnost.model';
 import { NacionalnostService } from '../services/nacionalnost.service';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { NacionalnostDialogComponent } from '../dialog/nacionalnost-dialog/nacionalnost-dialog.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-nacionalnost',
@@ -15,8 +17,14 @@ import { NacionalnostDialogComponent } from '../dialog/nacionalnost-dialog/nacio
 export class NacionalnostComponent implements OnInit {
 
   displayedColumns = ['id', 'naziv', 'skracenica', 'actions'];
-  dataSource: Observable<Nacionalnost[]>;
+  dataSource: MatTableDataSource<Nacionalnost>;
   database: NacionalnostService | null;
+
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator;
+  @ViewChild(MatSort)
+  sort: MatSort;
+  
 
   constructor(public httpClient: HttpClient, public nacionalnostService: NacionalnostService, public dialog: MatDialog) { }
 
@@ -36,7 +44,23 @@ export class NacionalnostComponent implements OnInit {
   }
 
   public loadDate() {
-    this.dataSource = this.nacionalnostService.getAllNacionalnost();
+   this.nacionalnostService.getAllNacionalnost().subscribe(data =>{
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.sortingDataAccessor = (data, property) => {
+        switch (property) {
+          case 'id': return data[property];
+          default: return data[property].toLocaleLowerCase();  
+        }
+      };
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
+  
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 
 }

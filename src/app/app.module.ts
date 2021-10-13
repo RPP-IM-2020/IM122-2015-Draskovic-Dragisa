@@ -1,3 +1,6 @@
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { IgracService } from './services/igrac.service';
+import { TimService } from './services/tim.service';
 import { LigaService } from './services/liga.service';
 import { NacionalnostService } from './services/nacionalnost.service';
 import { Component } from '@angular/core';
@@ -32,6 +35,13 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LigaDialogComponent } from './dialog/liga-dialog/liga-dialog.component';
+import { TimDialogComponent } from './dialog/tim-dialog/tim-dialog.component';
+import { IgracDialogComponent } from './dialog/igrac-dialog/igrac-dialog.component';
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatNativeDateModule, MatOptionModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -58,7 +68,9 @@ const Routes = [
     AuthorComponent,
     AboutComponent,
     NacionalnostDialogComponent,
-    LigaDialogComponent
+    LigaDialogComponent,
+    TimDialogComponent,
+    IgracDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -74,14 +86,23 @@ const Routes = [
     HttpClientModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    MatSelectModule,
+    MatOptionModule,
     MatDialogModule,
+    MatDatepickerModule,
     FormsModule,
+    MatCheckboxModule,
+    MatNativeDateModule,
     MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
     RouterModule.forRoot(Routes)      
   ],
-  providers: [
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
    NacionalnostService,
-   LigaService
+   LigaService,
+   TimService,
+   IgracService
   ],
   bootstrap: [AppComponent]
 })
