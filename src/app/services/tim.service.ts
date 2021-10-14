@@ -6,7 +6,14 @@ import { Tim } from "../models/tim.model";
 @Injectable()
 export class TimService {
     timovi: Tim[];
-    private readonly API_URL = 'http://localhost:8083/tim/';
+
+    //End Point u Development mode-u
+    //private readonly API_URL = 'http://localhost:8083/tim/';
+
+    //End Point u Development mode-u
+    private readonly API_URL = 'http://backend-rva.herokuapp.com/tim/';
+
+
     dataChange: BehaviorSubject<Tim[]> = new BehaviorSubject<Tim[]>([]);
 
     constructor(private httpClient: HttpClient) {

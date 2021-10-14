@@ -7,7 +7,11 @@ import { BehaviorSubject, Observable } from "rxjs";
 @Injectable()
 export class NacionalnostService {
 
-    private readonly API_URL = 'http://localhost:8083/nacionalnost/';
+    //End Point u Development mode-u
+    //private readonly API_URL = 'http://localhost:8083/nacionalnost/';
+    
+    //End Point u Development mode-u
+    private readonly API_URL = 'http://backend-rva.herokuapp.com/nacionalnost/';
     dataChange: BehaviorSubject<Nacionalnost[]> = new BehaviorSubject<Nacionalnost[]>([]);
 
     constructor(private httpClient: HttpClient) {

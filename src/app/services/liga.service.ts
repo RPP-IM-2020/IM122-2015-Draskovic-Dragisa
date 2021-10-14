@@ -6,7 +6,11 @@ import { BehaviorSubject, Observable } from "rxjs";
 @Injectable()
 export class LigaService {
 
-    private readonly API_URL = 'http://localhost:8083/liga/';
+    //End Point u Development mode-u
+    //private readonly API_URL = 'http://localhost:8083/liga/';
+
+    //End Point u Development mode-u
+    private readonly API_URL = 'http://backend-rva.herokuapp.com/liga/';
     dataChange: BehaviorSubject<Liga[]> = new BehaviorSubject<Liga[]>([]);
 
     constructor(private httpClient: HttpClient) {

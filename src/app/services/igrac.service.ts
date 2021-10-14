@@ -9,9 +9,13 @@ import { Injectable } from "@angular/core";
 export class IgracService{
     timovi: Igrac[];
 
-    private readonly API_URL = 'http://localhost:8083/igrac/';
-    private readonly API_URL_I = 'http://localhost:8083/igracTima/';
-    
+    //End Point u Development mode-u
+    //private readonly API_URL = 'http://localhost:8083/igrac/';
+    //private readonly API_URL_I = 'http://localhost:8083/igracTima/';
+
+    //End Point u Development mode-u
+    private readonly API_URL = 'http://backend-rva.herokuapp.com/igrac/';
+    private readonly API_URL_I = 'http://backend-rva.herokuapp.com/igracTima/';
     dataChange: BehaviorSubject<Igrac[]> = new BehaviorSubject<Igrac[]>([]);
 
     constructor(private httpClient: HttpClient){
